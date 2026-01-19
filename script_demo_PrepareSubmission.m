@@ -10,31 +10,27 @@
 %
 % If you have questions or comments, please contact Sean Brennan at
 % sbrennan@psu.edu
-
-% EDITS NEEDED HERE
-
+%
 % This code repo contains tools that do the following steps:
 %
-% * Downloads student folders from OneDrive
+% * Packages student submissions into one zip file containing all
+%   variables, files, and directories that the student is submitting for an
+%   assignment.
 %
-% * Compares these submissions to a local copy, identifying any differences
-%
-% * For files/directories that are different, creates a backup copy of the
-% old version
-%
-% * Keeps a tally of which submissions are complete
-% 
-% * Send emails to students automatically that their submissions were
-% received
-% 
-% As well, step-by-step instructions for using this code are provided in
-% the README.md file.
+% * Extracts, as part of package, computer identifiers including hardware,
+%   software, MATLAB install info, and UTC time
 
 % REVISION HISTORY:
 % 
 % 2026_01_19 by Sean Brennan, sbrennan@psu.edu
-% - Created the first version for use in the Vehicle Dynamics course
-%
+% - Created the first version of repo for use in the Vehicle Dynamics 
+% - In fcn_PrepareSubmission_packageAnswers
+%   % * Wrote the code originally, using breakDataIntoLaps as starter
+%   % * Tested with basic variable packaging
+% - In fcn_PrepareSubmission_getIdentifiers 
+%   % * Wrote the code originally, using breakDataIntoLaps as starter
+%   % * Extracts identifiers for the current computer
+%   % * Added UTC time query also
 % (new release)
 
 
@@ -72,13 +68,13 @@ end
 clear dependencyURLs dependencySubfolders
 ith_repo = 0;
 
-ith_repo = ith_repo+1;
-dependencyURLs{ith_repo} = 'https://github.com/ivsg-psu/Classes_Grading_LoadRoster';
-dependencySubfolders{ith_repo} = {'Functions','Data'};
- 
 % ith_repo = ith_repo+1;
-% dependencyURLs{ith_repo} = 'https://github.com/ivsg-psu/FieldDataCollection_VisualizingFieldData_PlotRoad';
+% dependencyURLs{ith_repo} = 'https://github.com/ivsg-psu/Classes_Grading_LoadRoster';
 % dependencySubfolders{ith_repo} = {'Functions','Data'};
+ 
+ith_repo = ith_repo+1;
+dependencyURLs{ith_repo} = 'https://github.com/ivsg-psu/FieldDataCollection_VisualizingFieldData_PlotRoad';
+dependencySubfolders{ith_repo} = {'Functions','Data'};
 
 % ith_repo = ith_repo+1;
 % dependencyURLs{ith_repo} = 'https://github.com/ivsg-psu/PathPlanning_GeomTools_GeomClassLibrary';
@@ -157,6 +153,22 @@ setenv('MATLABFLAG_PLOTROAD_ALIGNMATLABLLAPLOTTINGIMAGES_LON','0.0000054');
 disp('Welcome to the demo code for the PrepareSubmission library!')
 
 
+%% fcn_PrepareSubmission_packageAnswers
+figNum = 10001;
+titleString = sprintf('DEMO case: fcn_PrepareSubmission_packageAnswers');
+fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
+% figure(figNum); clf;
+
+
+studentNumber = 90000000;
+zipName = fullfile(pwd,'Data',sprintf('SUBMISSION_%7.0f',studentNumber));
+A = 1; B = rand(3); C = "hello";
+typeList = {'var','var','var'};
+nameList = {'A','B','C'};      % variable names as character vectors
+
+%%%%%%%%%%
+% Call the function
+fcn_PrepareSubmission_packageAnswers(zipName, typeList, nameList, A, B, C, (figNum))
 
 %% Functions follow
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

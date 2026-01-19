@@ -51,12 +51,14 @@ function fcn_PrepareSubmission_packageAnswers(zipName, typeList, nameList, varar
 % REVISION HISTORY:
 %
 % 2026_01_19 by Sean Brennan, sbrennan@psu.edu
-% - wrote the code originally, using breakDataIntoLaps as starter
+% - In fcn_PrepareSubmission_packageAnswers
+%   % * Wrote the code originally, using breakDataIntoLaps as starter
+%   % * Tested with basic variable packaging
 
 % TO-DO:
 %
 % 2026_01_19 by Sean Brennan, sbrennan@psu.edu
-% - add NTP time query
+% - add file and directory packaging
 
 
 
@@ -187,18 +189,9 @@ for ith_input = 1:length(typeList)
 	end
 end
 
-identity = struct();
-identity.Platform = computer;
-identity.Arch = computer('arch');
-identity.HostName = char(java.net.InetAddress.getLocalHost.getHostName());
-identity.User = getenv('USER');
-identity.MATLAB = version;
-identity.Installed = ver;
-identity.GPUcount = gpuDeviceCount;
-identity.MACs = getMACs;
-disp(identity);
+identifiers = fcn_PrepareSubmission_getIdentifiers((-1));
 
-nameList{end+1} = 'identity';
+nameList{end+1} = 'identifiers';
 save('localVariables.mat',nameList{:},'-v7.3')
 
 files = {'localVariables.mat'};
