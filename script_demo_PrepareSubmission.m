@@ -32,8 +32,13 @@
 %   % * Extracts identifiers for the current computer
 %   % * Added UTC time query also
 % (new release)
-
-
+%
+% 2026_01_22 by Sean Brennan, sbrennan@psu.edu
+% - In fcn_PrepareSubmission_getIdentifiers 
+%   % * Shut off call to check GPU count. This requires extra toolboxes
+%   % * Renamed getMACs to fcn_INTERNAL_getMACs for clarity
+% (new release)
+%
 % TO-DO:
 % - 2026_01_19 by Sean Brennan, sbrennan@psu.edu
 %   (add items here)

@@ -54,6 +54,12 @@ function identifiers = fcn_PrepareSubmission_getIdentifiers(varargin)
 %   % * Wrote the code originally, using breakDataIntoLaps as starter
 %   % * Extracts identifiers for the current computer
 %   % * Added UTC time query also
+%
+% 2026_01_22 by Sean Brennan, sbrennan@psu.edu
+% - In fcn_PrepareSubmission_getIdentifiers 
+%   % * Shut off call to check GPU count. This requires extra toolboxes
+%   % * Renamed getMACs to fcn_INTERNAL_getMACs for clarity
+
 
 % TO-DO:
 %
@@ -187,8 +193,8 @@ identifiers.HostName = char(java.net.InetAddress.getLocalHost.getHostName());
 identifiers.User = getenv('USER');
 identifiers.MATLABversion = version;
 identifiers.InstalledPackages = ver;
-identifiers.GPUcount = gpuDeviceCount;
-identifiers.MACs = getMACs;
+identifiers.GPUcount = 0; % gpuDeviceCount;
+identifiers.MACs = fcn_INTERNAL_getMACs;
 identifiers.UTCdatetime = fcn_debugTools_timeQueryNTPserver('time.nist.gov', [], [], -1);
 
 %% Plot the results (for debugging)?
@@ -224,8 +230,8 @@ end % Ends main function
 % See: https://patorjk.com/software/taag/#p=display&f=Big&t=Functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%§
 
-
-function macs = getMACs()
+%% fcn_INTERNAL_getMACs
+function macs = fcn_INTERNAL_getMACs()
 % getMACs Return cell array of MAC addresses (formatted XX-XX-XX-XX-XX-XX)
 macs = {};
 import java.net.NetworkInterface
@@ -239,4 +245,4 @@ while en.hasMoreElements()
         macs{end+1,1} = upper(strjoin(arrayfun(@(x) sprintf('%02X', x), double(b), 'Uni', false), '-')); %#ok<AGROW>
     end
 end
-end
+end % Ends fcn_INTERNAL_getMACs
