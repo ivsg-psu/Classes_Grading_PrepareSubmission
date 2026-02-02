@@ -195,7 +195,7 @@ identifiers.MATLABversion = version;
 identifiers.InstalledPackages = ver;
 identifiers.GPUcount = 0; % gpuDeviceCount;
 identifiers.MACs = fcn_INTERNAL_getMACs;
-identifiers.UTCdatetime = fcn_debugTools_timeQueryNTPserver('time.nist.gov', [], [], -1);
+identifiers.UTCdatetime = fcn_DebugTools_timeQueryNTPserver('time.nist.gov', [], [], -1);
 
 %% Plot the results (for debugging)?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
