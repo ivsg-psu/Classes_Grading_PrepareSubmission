@@ -54,6 +54,11 @@ function fcn_PrepareSubmission_packageAnswers(zipName, typeList, nameList, varar
 % - In fcn_PrepareSubmission_packageAnswers
 %   % * Wrote the code originally, using breakDataIntoLaps as starter
 %   % * Tested with basic variable packaging
+%
+% 2026_01_22 by Sean Brennan, sbrennan@psu.edu
+% - In fcn_PrepareSubmission_packageAnswers
+%   % * Added fix to check that the filepath exists, and to create folder
+%   %   % if not
 
 % TO-DO:
 %
@@ -195,6 +200,13 @@ nameList{end+1} = 'identifiers';
 save('localVariables.mat',nameList{:},'-v7.3')
 
 files = {'localVariables.mat'};
+
+% Make sure folder exists
+[filepath,~,~] = fileparts(zipName);
+if ~exist(filepath,'dir')
+    fcn_DebugTools_makeDirectory(filepath);
+end
+
 zip(zipName, files);         % create bundle.zip containing the listed files
 
 delete('localVariables.mat');

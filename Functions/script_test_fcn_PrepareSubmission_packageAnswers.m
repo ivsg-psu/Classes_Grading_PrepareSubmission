@@ -75,6 +75,54 @@ fcn_PrepareSubmission_packageAnswers(zipName, typeList, nameList, A, B, C, (figN
 % % Make sure plot opened up
 % assert(isequal(get(gcf,'Number'),figNum));
 
+%% DEMO case: basic example where folder must be created
+figNum = 10002;
+titleString = sprintf('DEMO case: basic example where folder must be created');
+fprintf(1,'Figure %.0f: %s\n',figNum, titleString);
+% figure(figNum); clf;
+
+if exist('LaLa','dir')
+    rmdir('LaLa','s');
+end
+
+studentNumber = 90000000;
+zipName = fullfile(pwd,'LaLa',sprintf('SUBMISSION_%7.0f',studentNumber));
+A = 1; B = rand(3); C = "hello";
+typeList = {'var','var','var'};
+nameList = {'A','B','C'};      % variable names as character vectors
+
+%%%%%%%%%%
+% Call the function
+fcn_PrepareSubmission_packageAnswers(zipName, typeList, nameList, A, B, C, (figNum))
+
+rmdir('LaLa','s');
+
+% sgtitle(titleString, 'Interpreter','none');
+
+% % Check variable types
+% assert(isnumeric(totalsCollected.totalSame));
+% assert(isnumeric(totalsCollected.totalAdded));
+% assert(isnumeric(totalsCollected.totalDeleted));
+% assert(isnumeric(totalsCollected.totalModified));
+% assert(isnumeric(totalsCollected.totalErrored));
+% 
+% % Check variable sizes
+% assert(isequal(size(totalsCollected.totalSame),[1 1]));
+% assert(isequal(size(totalsCollected.totalAdded),[1 1]));
+% assert(isequal(size(totalsCollected.totalDeleted),[1 1]));
+% assert(isequal(size(totalsCollected.totalModified),[1 1]));
+% assert(isequal(size(totalsCollected.totalErrored),[1 1]));
+
+% % Check variable values
+% % Are the laps starting at expected points?
+% assert(isequal(2,min(cell_array_of_lap_indices{1})));
+% assert(isequal(102,min(cell_array_of_lap_indices{2})));
+% assert(isequal(215,min(cell_array_of_lap_indices{3})));
+
+% % Make sure plot opened up
+% assert(isequal(get(gcf,'Number'),figNum));
+
+
 
 %% Test cases start here. These are very simple, usually trivial
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
