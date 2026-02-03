@@ -39,10 +39,11 @@
 %   % * Renamed getMACs to fcn_INTERNAL_getMACs for clarity
 % (new release)
 %
-% 2026_01_22 by Sean Brennan, sbrennan@psu.edu
+% 2026_02_03 by Sean Brennan, sbrennan@psu.edu
 % - In fcn_PrepareSubmission_packageAnswers
 %   % * Added fix to check that the filepath exists, and to create folder
 %   %   % if not
+% (new release)
 
 
 % TO-DO:
